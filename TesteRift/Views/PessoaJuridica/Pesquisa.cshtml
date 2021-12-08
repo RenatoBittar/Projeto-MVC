@@ -1,0 +1,51 @@
+﻿@model TesteRift.Models.PessoaJuridica
+
+@{
+    ViewBag.Title = "Pesquisar";
+    WebGrid grid = new WebGrid(canPage: false, canSort: false);
+    grid.Bind(Model.pessoas, autoSortAndPage: false);
+}
+
+<h2>Pesquisa</h2>
+
+@using (Html.BeginForm())
+{
+    <form class="form-horizontal" role="form">
+        <table class="table">
+            <tr>
+                <td> CNPJ</td>
+                <td>@Html.TextBoxFor(model => model.CNPJ)</td>
+            </tr>
+            <tr>
+                <td>RazaoSocial</td>
+                <td>@Html.TextBoxFor(model => model.RazaoSocial)</td>
+            </tr>
+            <tr>
+                <td>NomeFantasia</td>
+                <td>@Html.TextBoxFor(model => model.NomeFantasia)</td>
+            </tr>
+                      <tr>
+                <td colspan="2">
+                    <input type="submit" id="search" title="Pesquisar" value="Pesquisar" />
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div id="resultadoPesquisa">
+
+        @grid.GetHtml(tableStyle:"table table-bordered",
+        fillEmptyRows: true, alternatingRowStyle: "alternate-row", headerStyle: "grid-header", footerStyle: "grid-footer",
+        columns: new[] {
+            grid.Column("CNPJ"),
+            grid.Column("RazaoSocial"),
+            grid.Column("NomeFantasia"),
+            grid.Column("Endereco"),
+            grid.Column("Telefone"),
+            grid.Column("Email"),
+
+    })
+    </div>
+}
+
+
+
